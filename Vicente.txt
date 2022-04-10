@@ -1,0 +1,15 @@
+Cadastro de Convidados.
+ID
+Nome
+E-mail
+Quantidade de Convites
+Convite Enviado
+Convite Falado
+Confirmação
+ID_telefone
+
+
+
+Telefone
+id
+telefone
