@@ -1,0 +1,36 @@
+.admin-form-content{
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.admin-base-form{
+  margin-top: 40px;
+  padding: 70px 45px 50px 45px;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  justify-content: center;
+  width: fit-content;
+}
+
+.base-form-title{
+  font-size: 24px;
+  line-height: 33px;
+  letter-spacing: -0.015em;
+  color: #263238;
+  text-transform: uppercase;
+  margin-bottom: 45px;
+}
+
+.base-form-action{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.form-control{
+  width: 400px;
+}

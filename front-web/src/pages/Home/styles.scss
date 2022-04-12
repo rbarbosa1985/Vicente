@@ -1,0 +1,48 @@
+.container{
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;  
+}
+
+.home-content{
+  padding: 40px;
+  flex-direction: row;
+  flex-basis: auto;
+  text-align: center;
+}
+
+.home-text{
+  align-self: center;
+}
+
+.text-title{
+  font-weight: bold;
+  color: burlywood
+}
+
+.text-title2{
+  color: green;
+  margin-bottom: 50px;
+}
+
+.text-subtitle{
+  color: burlywood
+}
+
+.text-date{
+  font-size: xx-large;
+  color: green;
+}
+
+.text-address{
+  color: burlywood;
+  margin-bottom: 50px;
+}
+
+.convite{
+  width: 80%;
+  border-radius: 20px;
+}

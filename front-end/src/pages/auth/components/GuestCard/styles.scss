@@ -1,0 +1,45 @@
+.guest-card{
+  padding: 20px 20px 30px 20px;
+  text-align: center;
+}
+
+.guest-name{
+  font-size: 18px;
+  line-height: 25px;
+  letter-spacing: -0.015em;    
+}
+
+.guest-telefone{
+  font-size: 12px;
+  line-height: 25px;
+  letter-spacing: -0.015em;    
+}
+
+.guest-email{
+  font-size: 12px;
+  line-height: 25px;
+  letter-spacing: -0.015em;    
+}
+
+.guest-dependent{
+  font-size: 16px;
+  line-height: 25px;
+  letter-spacing: -0.015em;    
+  margin-top: 10px;
+  border-top: 1px solid #E1E1E1;
+  display: flex;
+  justify-content: center;
+}
+
+.guest-invite{
+  font-size: 16px;
+  line-height: 25px;
+  letter-spacing: -0.015em;    
+  margin-top: 10px;
+}
+
+.guest-status{
+  margin-left: 5px;
+  color: red;
+}
+

@@ -110,8 +110,8 @@ public class GuestService {
 	}
 
 	@Transactional(readOnly = true)
-	public Page<GuestDTO> findAllPaged(PageRequest pageRequest){
-		Page<Guest> list = repository.findAll(pageRequest);
+	public Page<GuestDTO> findAllPaged(PageRequest pageRequest, String name){
+		Page<Guest> list = repository.find(name, pageRequest);
 		return list.map(x -> new GuestDTO(x, x.getDependents()));
 	}
 
