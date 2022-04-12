@@ -24,7 +24,7 @@ export default function GuestList( { guestsResponse, activePage, handleChangePag
           </Link>
         ))}
       </div>
-      {guestsResponse && (
+      {guestsResponse && guestsResponse.totalPages > 1 && (
         <Pagination
           totalPages={guestsResponse.totalPages}
           activePage={activePage}

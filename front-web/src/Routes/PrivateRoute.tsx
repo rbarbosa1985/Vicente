@@ -1,6 +1,7 @@
 import React from 'react';
-import {Redirect, Route} from "react-router-dom";
-import {isAllowedByRole, isAuthenticated, Role} from "..//utils/auth";
+import { Redirect, Route } from "react-router-dom";
+
+import { isAllowedByRole, isAuthenticated, Role } from "..//utils/auth";
 
 type Props = {
     children: React.ReactNode;
@@ -23,7 +24,7 @@ const PrivateRoute = ({ children, path, allowedRoutes } : Props) => {
                     )
                 } else if (isAuthenticated() && !isAllowedByRole(allowedRoutes)){
                     return (
-                        <Redirect to={{pathname: "/admin"}}/>
+                        <Redirect to={{pathname: "/admin/dependents"}}/>
                     )
                 }
                 return children;
