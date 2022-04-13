@@ -1,6 +1,7 @@
-import axios, {Method} from 'axios';
-import {CLIENT_ID, CLIENT_SECRET, getSessionData, logout} from './auth';
+import axios, { Method } from 'axios';
 import qs from 'qs';
+
+import { CLIENT_ID, CLIENT_SECRET, getSessionData, logout } from './auth';
 
 type RequestParams = {
      method?: Method;
@@ -15,7 +16,7 @@ type LoginData ={
      password: string;
 }
 
-const BASE_URL = process.env.REACT_APP_BACKEND_URL ?? 'http://192.168.1.20:8080';
+const BASE_URL = process.env.REACT_APP_BACKEND_URL ?? 'http://192.168.1.20:8080' ?? 'http://200.220.195.215:8080' ;
 
 axios.interceptors.response.use(function (response) {
      return response;
