@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from "react";
-import Navbar from "../Navbar";
+import Navbar from "./Navbar";
 import GuestForm from "./GuestForm";
 import "./styles.scss";
 import { GuestResponse } from "../../../types/Guests";
@@ -34,11 +34,11 @@ export default function Guests() {
 
   const handleChangePage = (page: number) => {
     setActivePage(page);
-  }
+  };
 
   const handleRefresh = () => {
     getGuests();
-  }
+  };
 
   return (
     <div className="guest-container">
@@ -47,12 +47,19 @@ export default function Guests() {
         handleChangeName={handleChangeName}
         qtd={guestsResponse?.totalElements}
       />
-      <div>
-        <Switch>
-          <Route path="/admin/guests" exact ><GuestList guestsResponse={guestsResponse} activePage={activePage} handleChangePage={handleChangePage} /></Route>
-          <Route path="/admin/guests/:guestId" ><GuestForm handleRefresh={handleRefresh}/> </Route>
-        </Switch>
-      </div>
+
+      <Switch>
+        <Route path="/admin/guests" exact>
+          <GuestList
+            guestsResponse={guestsResponse}
+            activePage={activePage}
+            handleChangePage={handleChangePage}
+          />
+        </Route>
+        <Route path="/admin/guests/:guestId">
+          <GuestForm handleRefresh={handleRefresh} />{" "}
+        </Route>
+      </Switch>
     </div>
   );
 }

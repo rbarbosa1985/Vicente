@@ -1,22 +1,18 @@
-.admin-form-content{
+.admin-form-content {
   display: flex;
   text-align: center;
-  justify-content: center;
-  width: 100%;
+  align-items: center;
 }
 
-.admin-base-form{
-  margin-top: 40px;
-  padding: 70px 45px 50px 45px;
+.admin-base-form {
+  padding: 20px;
   border-radius: 20px;
   display: flex;
   flex-direction: column;
-  text-align: center;
-  justify-content: center;
-  width: fit-content;
+  width: 80%;
 }
 
-.base-form-title{
+.base-form-title {
   font-size: 24px;
   line-height: 33px;
   letter-spacing: -0.015em;
@@ -25,12 +21,18 @@
   margin-bottom: 45px;
 }
 
-.base-form-action{
-  width: 100%;
+.form-names {
+  text-align: left;
+}
+
+.base-form-action {
   display: flex;
   flex-direction: column;
 }
 
-.form-control{
-  width: 400px;
+
+@media (max-width: 1024px){
+  .admin-base-form {
+    width: 100%;
+  }
 }

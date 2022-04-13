@@ -2,11 +2,10 @@ import { Link, NavLink, useLocation } from "react-router-dom";
 import "./styles.scss";
 import {
   getAccessTokenDecode,
-  isAuthenticated,
   logout,
-} from "../../../utils/auth";
+} from "../../../../utils/auth";
 import { useEffect, useState } from "react";
-import { ReactComponent as SearchIcon } from "../../../assets/images/serach-icon.svg";
+import { ReactComponent as SearchIcon } from "../../../../assets/images/serach-icon.svg";
 
 type Props = {
   name?: string;

@@ -1,6 +1,6 @@
 import "./styles.scss";
 import { toast } from "react-toastify";
-import { useForm, Controller } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { useHistory, useParams } from "react-router-dom";
 import { makePrivateRequest } from "../../../../utils/request";
 import { useEffect } from "react";
@@ -19,7 +19,7 @@ type Props = {
   guest_id?: number;
 };
 
-export default function DependentForm({ handleRefresh , guest_id }: Props) {
+export default function DependentForm({ handleRefresh, guest_id }: Props) {
   const { register, handleSubmit, errors, setValue } = useForm<FormState>();
   const history = useHistory();
   const { dependentId } = useParams<ParamsType>();
@@ -45,7 +45,7 @@ export default function DependentForm({ handleRefresh , guest_id }: Props) {
       guest: guest_id,
       name: nome.name,
     };
-    console.log(data)
+    console.log(data);
     makePrivateRequest({
       method: isEditing ? "PUT" : "POST",
       url: isEditing ? `/dependents/${dependentId}` : "/dependents",
@@ -64,44 +64,40 @@ export default function DependentForm({ handleRefresh , guest_id }: Props) {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <div className="admin-form-content">
+    <form onSubmit={handleSubmit(onSubmit)} className="admin-form-content">
         <h1 className="base-form-title">
           {isEditing ? "editar um convidado" : "cadastrar um convidado"}
         </h1>
-        <div className="row">
-          <div className="col-6">
-            <div className="margin-bottom-30">
-              <input
-                type="text"
-                name="name"
-                ref={register({
-                  required: "Campo Obrigatório.",
-                })}
-                placeholder="Nome do Convidado"
-                className="form-control  input-base"
-              />
-              {errors.name && (
-                <div className="invalid-feedback d-block">
-                  {errors.name.message}
-                </div>
-              )}
-            </div>{" "}
-            <div className="base-form-action">
-              <button
-                type="button"
-                className="btn btn-outline-danger border-radius-10 mr-3 btn-lg"
-                onClick={handleCancel}
-              >
-                CANCELAR
-              </button>
-              <button className="btn btn-primary border-radius-10 mr-3 btn-lg">
-                SALVAR
-              </button>
+        <div className="margin-bottom-30 form-dados">
+          <p className="form-name">Digite o Nome do Convidado:</p>
+          <input
+            type="text"
+            name="name"
+            ref={register({
+              required: "Campo Obrigatório.",
+            })}
+            placeholder="Nome do Convidado"
+            className="form-control input-base form-input"
+          />
+          {errors.name && (
+            <div className="invalid-feedback d-block">
+              {errors.name.message}
             </div>
-          </div>
+          )}
         </div>
-      </div>
+        <div className="base-form-action">
+          <button className="btn btn-primary border-radius-10 btn-lg mb-2">
+            SALVAR
+          </button>
+
+          <button
+            type="button"
+            className="btn btn-outline-danger border-radius-10 btn-lg"
+            onClick={handleCancel}
+          >
+            CANCELAR
+          </button>
+        </div>
     </form>
   );
 }

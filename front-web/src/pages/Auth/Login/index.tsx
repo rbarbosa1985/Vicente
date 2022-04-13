@@ -44,7 +44,7 @@ export default function Login() {
           </div>
         )}
         <form className="login-form" onSubmit={handleSubmit(onSubmit)}>
-          <div className="margin-bottom-30">
+          <div className="margin-bottom-30  login-input">
             <input
               type="email"
               placeholder="Email"
@@ -56,7 +56,7 @@ export default function Login() {
                   message: "Email inválido.",
                 },
               })}
-              className={`form-control input-base ${
+              className={`form-control input-base login-input ${
                 errors.username ? "is-invalid" : ""
               }`}
             />
@@ -66,13 +66,13 @@ export default function Login() {
               </div>
             )}
           </div>
-          <div className="margin-bottom-30">
+          <div className="margin-bottom-30  login-input">
             <input
               type="password"
               placeholder="Senha"
               name="password"
               ref={register({ required: "Campo Obrigatório." })}
-              className={`form-control input-base ${
+              className={`form-control input-base${
                 errors.password ? "is-invalid" : ""
               }`}
             />
@@ -86,7 +86,7 @@ export default function Login() {
             Esqueci a senha?
           </Link>
           <div className="login-submit">
-            <button className="btn btn-lg btn-success login-btn">LOGAR</button>
+            <button className="btn btn-lg btn-success login-btn">CONECTAR</button>
           </div>
         </form>
       </div>
