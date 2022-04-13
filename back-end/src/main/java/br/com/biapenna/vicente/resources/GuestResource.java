@@ -51,6 +51,12 @@ public class GuestResource {
 //		return ResponseEntity.ok().body(list);
 //	}
 	
+	@GetMapping(value= "/dependent/{id}")
+	public ResponseEntity<GuestDTO> findByUserId(@PathVariable Long id){
+		GuestDTO guest = service.findByUserId(id);
+		return ResponseEntity.ok().body(guest);
+	}
+	
 	@GetMapping(value= "/{id}")
 	public ResponseEntity<GuestDTO> findById(@PathVariable Long id){
 		GuestDTO guest = service.findById(id);

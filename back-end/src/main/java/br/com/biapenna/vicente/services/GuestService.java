@@ -62,6 +62,14 @@ public class GuestService {
 		return new GuestDTO(entity, entity.getDependents());
 	}
 	
+	@Transactional(readOnly = true)
+	public GuestDTO findByUserId(Long id) {
+		Guest entity = repository.findByUserId(id);
+//		Guest entity = obj.orElseThrow(() -> new ResourceNotFoundException("Convidado não encontrado!"));
+		return new GuestDTO(entity, entity.getDependents());
+	}
+	
+	
 	@Transactional
 	public GuestDTO insert (GuestDTO dto) {
 		Guest entity = new Guest();

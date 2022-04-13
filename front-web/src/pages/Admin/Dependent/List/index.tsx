@@ -1,28 +1,40 @@
+import { useHistory } from "react-router-dom";
 import { toast } from "react-toastify";
+
 import { Guest } from "../../../../types/Guests";
 import { makePrivateRequest } from "../../../../utils/request";
 
 type Props = {
   guest?: Guest;
   onCreate: () => void;
-  // handleChangePage: (page: number) => void;
+  handleRefresh: () => void;
 };
 
-// const onRemove = (dependentID : number) => {
-//   const confirm = window.confirm('Deseja realmente excluir esse produto?');
-//   if (confirm) {
-//       makePrivateRequest({url: `/dependents/${dependentID}`, method: 'DELETE'})
-//           .then(() => {
-//               toast.info('Produto deletado com sucesso!');
-//               // getProducts();
-//           })
-//           .catch(() => {
-//               toast.error('Erro ao deletar o produto!');
-//           });
-//   }
-// }
+export default function DependentList({ guest, onCreate, handleRefresh }: Props) {
 
-export default function DependentList({ guest, onCreate }: Props) {
+  const history = useHistory();
+
+  function handleRemove(dependentID: number) {
+    const confirm = window.confirm("Deseja realmente excluir esse convidado?");
+    if (confirm) {
+      makePrivateRequest({
+        url: `/dependents/${dependentID}`,
+        method: "DELETE",
+      })
+        .then(() => {
+          toast.info("Convidado deletado com sucesso!");
+          
+        })
+        .catch(() => {
+          toast.error("Erro ao deletar o convidado!");
+        }).finally(() => handleRefresh());
+    }
+  }
+
+  function handleEdit( dependentId: number ){
+    history.push(`/admin/dependents/${dependentId}`)
+  }
+
   return (
     <>
       <div className="dependent-title">
@@ -52,8 +64,13 @@ export default function DependentList({ guest, onCreate }: Props) {
         <div className="dependent-list" key={dependent.id}>
           <h5 className="dependent-name">{dependent.name}</h5>
           <div className="options">
-            <button className="btn-success btn dependent-option" >EDITAR</button>
-            <button className="btn-danger btn dependent-option">APAGAR</button>
+            <button className="btn-success btn dependent-option" onClick={() => handleEdit(dependent.id)}>EDITAR</button>
+            <button
+              className="btn-danger btn dependent-option"
+              onClick={() => handleRemove(dependent.id)}
+            >
+              APAGAR
+            </button>
           </div>
         </div>
       ))}

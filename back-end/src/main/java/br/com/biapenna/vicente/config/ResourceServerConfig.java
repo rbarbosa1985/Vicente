@@ -29,13 +29,11 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 	@Autowired
 	private JwtTokenStore tokenStore;
 	
-	private static final String[] PUBLIC = { "/oauth/token", "/pagseguro" ,"/h2-console/**" };
+	private static final String[] PUBLIC = { "/oauth/token" ,"/h2-console/**" };
 	
-	private static final String[] VISITOR = { "/message/**" };
+	private static final String[] VISITOR = { "/dependents/**" };
 	
-	private static final String[] DONATION = { "/donation/**", "/pagseguro/**" };
-
-	private static final String[] MEMBER = { "/message/**", "/donation/**", "/users/**" };
+	private static final String[] MEMBER = { "/guests/**", "/users/**" };
 	
 	@Override
 	public void configure(ResourceServerSecurityConfigurer resources) throws Exception {
@@ -53,12 +51,9 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 		
 		http.authorizeRequests()
 		.antMatchers(PUBLIC).permitAll()
-		.antMatchers(HttpMethod.GET).permitAll();
-//		.antMatchers(HttpMethod.POST, DONATION).permitAll()
-//		.antMatchers(HttpMethod.GET, "/donation/**").hasAnyRole("OPERATOR")
-//		.antMatchers(VISITOR).hasAnyRole("ADMIN", "OPERATOR")
-//		.antMatchers(MEMBER).hasAnyRole("ADMIN")
-//		.anyRequest().authenticated();
+		.antMatchers(VISITOR).permitAll() /*.hasAnyRole("ADMIN", "GUEST")*/
+		.antMatchers(MEMBER).permitAll() /*.hasAnyRole("ADMIN")*/
+		.anyRequest().authenticated();
 		
 		http.cors().configurationSource(corsConfigurationSource());
 	}

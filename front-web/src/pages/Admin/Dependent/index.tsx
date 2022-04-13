@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react";
+import { Route, Switch, useHistory } from "react-router-dom";
+
+import { Guest } from "../../../types/Guests";
 import { getSessionData } from "../../../utils/auth";
 import { makePrivateRequest } from "../../../utils/request";
-import "./styles.scss";
-import { Guest } from "../../../types/Guests";
-import { Route, Switch, useHistory } from "react-router-dom";
-import DependentList from "./List";
 import DependentForm from "./Form";
+import DependentList from "./List";
+
+import "./styles.scss";
 
 export default function Dependent() {
   const [currentUser, setCurrentUser] = useState(3);
@@ -39,7 +41,7 @@ export default function Dependent() {
     <div className="dependent-container">
       <div className="dependent-content card-base">
         <Switch>
-          <Route path="/admin/dependents" exact ><DependentList guest={guest} onCreate={onCreate}/></Route>
+          <Route path="/admin/dependents" exact ><DependentList guest={guest} handleRefresh={handleRefresh} onCreate={onCreate}/></Route>
           <Route path="/admin/dependents/:dependentId" ><DependentForm handleRefresh={handleRefresh} guest_id={guest?.id}/> </Route>
         </Switch>
       </div>
