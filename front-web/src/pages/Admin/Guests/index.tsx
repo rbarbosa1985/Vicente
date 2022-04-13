@@ -1,11 +1,15 @@
 import { useCallback, useEffect, useState } from "react";
-import Navbar from "./Navbar";
-import GuestForm from "./GuestForm";
-import "./styles.scss";
+import { Route, Switch } from "react-router-dom";
+
 import { GuestResponse } from "../../../types/Guests";
 import { makePrivateRequest } from "../../../utils/request";
-import { Route, Switch } from "react-router-dom";
+import GuestForm from "./GuestForm";
 import GuestList from "./GuestList";
+import Navbar from "./Navbar";
+import { ReactComponent as SearchIcon } from "../../../assets/images/serach-icon.svg";
+
+
+import "./styles.scss";
 
 export default function Guests() {
   const [guestsResponse, setGuestsResponse] = useState<GuestResponse>();
@@ -44,22 +48,25 @@ export default function Guests() {
     <div className="guest-container">
       <Navbar
         name={name}
-        handleChangeName={handleChangeName}
         qtd={guestsResponse?.totalElements}
       />
-
-      <Switch>
-        <Route path="/admin/guests" exact>
-          <GuestList
-            guestsResponse={guestsResponse}
-            activePage={activePage}
-            handleChangePage={handleChangePage}
-          />
-        </Route>
-        <Route path="/admin/guests/:guestId">
-          <GuestForm handleRefresh={handleRefresh} />{" "}
-        </Route>
-      </Switch>
+      <div className="guest-content-principal">
+        
+        <Switch>
+          <Route path="/admin/guests" exact>
+            <GuestList
+              handleChangeName={handleChangeName}
+              guestsResponse={guestsResponse}
+              activePage={activePage}
+              handleChangePage={handleChangePage}
+              name={name}
+            />
+          </Route>
+          <Route path="/admin/guests/:guestId">
+            <GuestForm handleRefresh={handleRefresh} />{" "}
+          </Route>
+        </Switch>
+      </div>
     </div>
   );
 }
