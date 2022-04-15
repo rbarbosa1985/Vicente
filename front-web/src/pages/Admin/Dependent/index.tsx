@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { Route, Switch, useHistory } from "react-router-dom";
 
 import { Guest } from "../../../types/Guests";
@@ -14,8 +14,9 @@ export default function Dependent() {
   const [guest, setGuest] = useState<Guest>();
   const history = useHistory();
 
-  async function getGuest() {
-    const currentUserData = await getSessionData();
+
+  const getGuest = useCallback(() => {
+    const currentUserData = getSessionData();
     setCurrentUser(currentUserData.userId);
     makePrivateRequest({ url: `/guests/dependent/${currentUser}` }).then(
       (response) => {
@@ -23,7 +24,7 @@ export default function Dependent() {
         console.log(response.data);
       }
     );
-  }
+  }, [currentUser]);
 
   const onCreate = () => {
     history.push("/admin/dependents/create");
@@ -35,16 +36,14 @@ export default function Dependent() {
 
   useEffect(() => {
     getGuest();
-  }, []);
+  }, [currentUser, getGuest]);
 
   return (
     <div className="dependent-container">
-      <div className="dependent-content card-base">
         <Switch>
           <Route path="/admin/dependents" exact ><DependentList guest={guest} handleRefresh={handleRefresh} onCreate={onCreate}/></Route>
           <Route path="/admin/dependents/:dependentId" ><DependentForm handleRefresh={handleRefresh} guest_id={guest?.id}/> </Route>
         </Switch>
-      </div>
     </div>
   );
 }

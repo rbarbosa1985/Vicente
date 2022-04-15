@@ -64,7 +64,7 @@ export default function DependentForm({ handleRefresh, guest_id }: Props) {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="admin-form-content">
+    <form onSubmit={handleSubmit(onSubmit)} className="admin-form-content card-base">
         <h1 className="base-form-title">
           {isEditing ? "editar um convidado" : "cadastrar um convidado"}
         </h1>
@@ -86,7 +86,7 @@ export default function DependentForm({ handleRefresh, guest_id }: Props) {
           )}
         </div>
         <div className="base-form-action">
-          <button className="btn btn-primary border-radius-10 btn-lg mb-2">
+          <button className="btn btn-outline-success border-radius-10 btn-lg mb-2">
             SALVAR
           </button>
 

@@ -1,8 +1,10 @@
 import { useHistory } from "react-router-dom";
 import { toast } from "react-toastify";
-import './styles.scss';
+
 import { Guest } from "../../../../types/Guests";
 import { makePrivateRequest } from "../../../../utils/request";
+
+import './styles.scss';
 
 type Props = {
   guest?: Guest;
@@ -36,7 +38,7 @@ export default function DependentList({ guest, onCreate, handleRefresh }: Props)
   }
 
   return (
-    <>
+    <div className="dependent-content card-base">
       <div className="dependent-title">
         <h2>
           Bem Vindo
@@ -60,6 +62,7 @@ export default function DependentList({ guest, onCreate, handleRefresh }: Props)
       )}
 
       <p>Convites Restantes: {guest?.invitation - guest?.dependents.length}</p>
+      <div className="wrapper-list">
       {guest?.dependents.map((dependent) => (
         <div className="dependent-list" key={dependent.id}>
           <h5 className="dependent-name">{dependent.name}</h5>
@@ -74,6 +77,7 @@ export default function DependentList({ guest, onCreate, handleRefresh }: Props)
           </div>
         </div>
       ))}
-    </>
+      </div>
+    </div>
   );
 }

@@ -1,8 +1,7 @@
 
 
 .dependent-container{
-  height: 100%;
-  height: 100%;
+  height: 100vh;
   display: flex;
   justify-content: center;
   vertical-align: middle;
@@ -16,12 +15,19 @@
   border-radius: 20px;
   padding: 20px;
   justify-content: center;
-  width: 100%;
+  width: 80%;
+  height: 90%;
+  margin: auto;
 }
 
 .dependent-title{
   margin-bottom: 20px;
   color: burlywood;
+}
+
+
+.wrapper-list{
+  overflow-y: auto;
 }
 
 p{

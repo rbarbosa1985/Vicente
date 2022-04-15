@@ -43,7 +43,6 @@ export default function GuestForm({ handleRefresh }: Props) {
   }, [guestId, isEditing, setValue]);
 
   const onSubmit = (data: FormState) => {
-    console.log("Oi");
     makePrivateRequest({
       method: isEditing ? "PUT" : "POST",
       url: isEditing ? `/guests/${guestId}` : "/guests",
@@ -62,7 +61,7 @@ export default function GuestForm({ handleRefresh }: Props) {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="admin-form-content">
+    <form onSubmit={handleSubmit(onSubmit)} className="admin-guest-form-content">
       <div className="admin-base-form card-base">
         <h1 className="base-form-title">
           {isEditing ? "editar um convidado" : "cadastrar um convidado"}

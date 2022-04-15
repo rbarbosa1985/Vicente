@@ -6,7 +6,7 @@ import { makePrivateRequest } from "../../../utils/request";
 import GuestForm from "./GuestForm";
 import GuestList from "./GuestList";
 import Navbar from "./Navbar";
-import { ReactComponent as SearchIcon } from "../../../assets/images/serach-icon.svg";
+
 
 
 import "./styles.scss";
@@ -19,7 +19,7 @@ export default function Guests() {
   const getGuests = useCallback(() => {
     const params = {
       page: activePage,
-      linesPerPage: 12,
+      linesPerPage: 2,
       name,
     };
     makePrivateRequest({ url: "/guests", params }).then((response) =>
@@ -47,7 +47,6 @@ export default function Guests() {
   return (
     <div className="guest-container">
       <Navbar
-        name={name}
         qtd={guestsResponse?.totalElements}
       />
       <div className="guest-content-principal">
