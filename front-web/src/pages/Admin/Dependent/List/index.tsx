@@ -33,6 +33,13 @@ export default function DependentList({ guest, onCreate, handleRefresh }: Props)
     }
   }
 
+  function handleConfirm(){
+    const confirm = window.confirm("Deseja realmente confirmar sua presença na Festa?");
+    if(confirm) {
+
+    }
+  }
+
   function handleEdit( dependentId: number ){
     history.push(`/admin/dependents/${dependentId}`)
   }
@@ -52,15 +59,14 @@ export default function DependentList({ guest, onCreate, handleRefresh }: Props)
           para a festa.
         </p>
       </div>
-      {guest?.invitation - guest?.dependents.length > 0 && (
+      {!guest?.status && (
         <button
-          className="btn-success btn btn-lg dependent-new"
-          onClick={onCreate}
+          className="btn-outline-success btn btn-lg dependent-new"
+          onClick={handleConfirm}
         >
-          ADICIONAR CONVIDADO
+          CONFIRMAR PRESENÇA
         </button>
       )}
-
       <p>Convites Restantes: {guest?.invitation - guest?.dependents.length}</p>
       <div className="wrapper-list">
       {guest?.dependents.map((dependent) => (
@@ -78,6 +84,14 @@ export default function DependentList({ guest, onCreate, handleRefresh }: Props)
         </div>
       ))}
       </div>
+      {guest?.invitation - guest?.dependents.length > 0 && (
+        <button
+          className="btn-success btn btn-lg dependent-new"
+          onClick={onCreate}
+        >
+          ADICIONAR CONVIDADO
+        </button>
+      )}
     </div>
   );
 }
