@@ -57,6 +57,12 @@ public class GuestResource {
 		return ResponseEntity.ok().body(guest);
 	}
 	
+	@PutMapping(value= "/dependent/{id}")
+	public ResponseEntity<GuestDTO> insertConfirm(@PathVariable Long id, @RequestBody GuestDTO dto){
+		dto = service.update(id, dto);
+		return ResponseEntity.ok().body(dto);
+	}
+	
 	@GetMapping(value= "/{id}")
 	public ResponseEntity<GuestDTO> findById(@PathVariable Long id){
 		GuestDTO guest = service.findById(id);

@@ -17,6 +17,7 @@ type Props = {
 export default function GuestList( { guestsResponse, name, handleChangeName, activePage, handleChangePage } : Props) {
   return (
     <>
+    <div className="card-list">
       <div className="card-base border-radius-20 input-search">
               <input
                 type="text"
@@ -46,6 +47,7 @@ export default function GuestList( { guestsResponse, name, handleChangeName, act
           onChange={(page) => handleChangePage(page)}
         />
       )}
+      </div>
     </>
   );
 }

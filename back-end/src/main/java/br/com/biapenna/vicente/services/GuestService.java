@@ -96,6 +96,7 @@ public class GuestService {
 		try {
 			Guest entity = repository.getOne(id);
 			copyDtoToEntity(dto, entity);
+			System.out.println(entity);
 			entity.setUser(userRepository.getOne(entity.getUser().getId()));
 			entity = repository.save(entity);
 			return new GuestDTO(entity);
@@ -129,7 +130,6 @@ public class GuestService {
 		entity.setEmail(dto.getEmail());
 		entity.setInvitation(dto.getInvitation());
 		entity.setTelephone(dto.getTelephone());
-		
 		
 		entity.getDependents().clear();
 		for (DependentDTO dependto : dto.getDependents()) {

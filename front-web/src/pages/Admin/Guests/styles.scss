@@ -2,6 +2,10 @@
   height: 100vh;
 }
 
+.guest-container2{
+  height: 100vh;
+}
+
 .guest-content-principal{
   padding: 20px;
 }
@@ -19,13 +23,19 @@
   color: #000;
 }
 
+.manu-mobile-btn{
+  z-index: auto;
+}
+
 .input-search{
   padding: 20px;
   display: flex;
   align-items: center;
   border-bottom: 1px solid #e1e1e1;
   flex:1;
+  margin-top: 10px;
   width: auto;
+  // z-index: 11;
   input {
        border: none;
 
@@ -40,8 +50,21 @@
 
 }
 
-@media (max-width: 1024px){
+@media (max-width: 1370px){
+  .guest-container{
+    height: 120vh;
+  }
+}
+
+@media (max-width: 1268px){
+  .guest-container{
+    height: 100%;
+  }
   .guest-content{
     justify-content: center;
+  }
+
+  .guest-container2{
+    height: 100vh;
   }
 }

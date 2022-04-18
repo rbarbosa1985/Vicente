@@ -2,6 +2,7 @@ export type GuestResponse = {
   content: Guest[];
   totalPages: number;
   totalElements: number;
+  numberOfElements: number;
 }
 
 export type Guest = {

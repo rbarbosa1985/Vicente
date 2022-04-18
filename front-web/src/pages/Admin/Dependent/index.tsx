@@ -10,9 +10,10 @@ import DependentList from "./List";
 import "./styles.scss";
 
 export default function Dependent() {
-  const [currentUser, setCurrentUser] = useState(3);
+  const [currentUser, setCurrentUser] = useState(0);
   const [guest, setGuest] = useState<Guest>();
   const history = useHistory();
+  const [confirm, setConfirm] = useState(0);
 
 
   const getGuest = useCallback(() => {
@@ -22,8 +23,10 @@ export default function Dependent() {
       (response) => {
         setGuest(response.data);
         console.log(response.data);
+        response.data.status ? setConfirm(1) : setConfirm(0);
       }
     );
+
   }, [currentUser]);
 
   const onCreate = () => {
@@ -41,7 +44,7 @@ export default function Dependent() {
   return (
     <div className="dependent-container">
         <Switch>
-          <Route path="/admin/dependents" exact ><DependentList guest={guest} handleRefresh={handleRefresh} onCreate={onCreate}/></Route>
+          <Route path="/admin/dependents" exact ><DependentList guest={guest} handleRefresh={handleRefresh} onCreate={onCreate} confirm={confirm}/></Route>
           <Route path="/admin/dependents/:dependentId" ><DependentForm handleRefresh={handleRefresh} guest_id={guest?.id}/> </Route>
         </Switch>
     </div>

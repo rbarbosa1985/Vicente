@@ -7,8 +7,6 @@ import GuestForm from "./GuestForm";
 import GuestList from "./GuestList";
 import Navbar from "./Navbar";
 
-
-
 import "./styles.scss";
 
 export default function Guests() {
@@ -19,7 +17,7 @@ export default function Guests() {
   const getGuests = useCallback(() => {
     const params = {
       page: activePage,
-      linesPerPage: 2,
+      linesPerPage: 8,
       name,
     };
     makePrivateRequest({ url: "/guests", params }).then((response) =>
@@ -45,12 +43,14 @@ export default function Guests() {
   };
 
   return (
-    <div className="guest-container">
+    <div className={guestsResponse?.numberOfElements > 1 ? "guest-container" : "guest-container2"}>
+      
       <Navbar
         qtd={guestsResponse?.totalElements}
       />
+      
+      
       <div className="guest-content-principal">
-        
         <Switch>
           <Route path="/admin/guests" exact>
             <GuestList

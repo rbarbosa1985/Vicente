@@ -4,16 +4,21 @@ import { toast } from "react-toastify";
 import { Guest } from "../../../../types/Guests";
 import { makePrivateRequest } from "../../../../utils/request";
 
-import './styles.scss';
+import "./styles.scss";
 
 type Props = {
+  confirm: number;
   guest?: Guest;
   onCreate: () => void;
   handleRefresh: () => void;
 };
 
-export default function DependentList({ guest, onCreate, handleRefresh }: Props) {
-
+export default function DependentList({
+  guest,
+  onCreate,
+  handleRefresh,
+  confirm,
+}: Props) {
   const history = useHistory();
 
   function handleRemove(dependentID: number) {
@@ -25,23 +30,72 @@ export default function DependentList({ guest, onCreate, handleRefresh }: Props)
       })
         .then(() => {
           toast.info("Convidado deletado com sucesso!");
-          
         })
         .catch(() => {
           toast.error("Erro ao deletar o convidado!");
-        }).finally(() => handleRefresh());
+        })
+        .finally(() => handleRefresh());
     }
   }
 
-  function handleConfirm(){
-    const confirm = window.confirm("Deseja realmente confirmar sua presença na Festa?");
-    if(confirm) {
-
+  function handleConfirm() {
+    if (!guest.status) {
+      const confirm = window.confirm(
+        "Deseja realmente confirmar sua presença na Festa?"
+      );
+      if (confirm) {
+        const data = {
+          name: guest.name,
+          email: guest.email,
+          invitation: guest.invitation,
+          telephone: guest.telephone,
+          status: true,
+        };
+        console.log(data);
+        makePrivateRequest({
+          method: "PUT",
+          url: `/guests/dependent/${guest.id}`,
+          data,
+        })
+          .then(() => {
+            toast.info("Presença confirmada com sucesso!");
+            handleRefresh();
+          })
+          .catch(() => {
+            toast.error("Erro ao confirmar o convidado!");
+          });
+      }
+    } else {
+      const confirm = window.confirm(
+        "Deseja realmente cancelar sua presença na Festa?"
+      );
+      if (confirm) {
+        const data = {
+          name: guest.name,
+          email: guest.email,
+          invitation: guest.invitation,
+          telephone: guest.telephone,
+          status: false,
+        };
+        console.log(data);
+        makePrivateRequest({
+          method: "PUT",
+          url: `/guests/dependent/${guest.id}`,
+          data,
+        })
+          .then(() => {
+            toast.info("Presença cancelada com sucesso!");
+            handleRefresh();
+          })
+          .catch(() => {
+            toast.error("Erro ao cancelar o convidado!");
+          });
+      }
     }
   }
 
-  function handleEdit( dependentId: number ){
-    history.push(`/admin/dependents/${dependentId}`)
+  function handleEdit(dependentId: number) {
+    history.push(`/admin/dependents/${dependentId}`);
   }
 
   return (
@@ -59,37 +113,52 @@ export default function DependentList({ guest, onCreate, handleRefresh }: Props)
           para a festa.
         </p>
       </div>
-      {!guest?.status && (
+      {!guest?.status ? (
         <button
           className="btn-outline-success btn btn-lg dependent-new"
           onClick={handleConfirm}
         >
           CONFIRMAR PRESENÇA
         </button>
+      ) : (
+        <button
+          className="btn-danger btn btn-lg dependent-new"
+          onClick={handleConfirm}
+        >
+          CANCELAR PRESENÇA
+        </button>
       )}
-      <p>Convites Restantes: {guest?.invitation - guest?.dependents.length}</p>
+      <p>
+        Convites Restantes:{" "}
+        {guest?.invitation - (guest?.dependents.length + confirm)}
+      </p>
       <div className="wrapper-list">
-      {guest?.dependents.map((dependent) => (
-        <div className="dependent-list" key={dependent.id}>
-          <h5 className="dependent-name">{dependent.name}</h5>
-          <div className="options">
-            <button className="btn-success btn dependent-option" onClick={() => handleEdit(dependent.id)}>EDITAR</button>
-            <button
-              className="btn-danger btn dependent-option"
-              onClick={() => handleRemove(dependent.id)}
-            >
-              APAGAR
-            </button>
+        {guest?.dependents.map((dependent) => (
+          <div className="dependent-list" key={dependent.id}>
+            <h5 className="dependent-name">{dependent.name}</h5>
+            <div className="options">
+              <button
+                className="btn-success btn dependent-option"
+                onClick={() => handleEdit(dependent.id)}
+              >
+                EDITAR
+              </button>
+              <button
+                className="btn-danger btn dependent-option"
+                onClick={() => handleRemove(dependent.id)}
+              >
+                APAGAR
+              </button>
+            </div>
           </div>
-        </div>
-      ))}
+        ))}
       </div>
-      {guest?.invitation - guest?.dependents.length > 0 && (
+      {guest?.invitation - (guest?.dependents.length + 1) > 0 && (
         <button
           className="btn-success btn btn-lg dependent-new"
           onClick={onCreate}
         >
-          ADICIONAR CONVIDADO
+          ADICIONAR ACOMPANHANTE
         </button>
       )}
     </div>
