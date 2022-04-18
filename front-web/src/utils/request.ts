@@ -16,7 +16,7 @@ type LoginData ={
      password: string;
 }
 
-const BASE_URL = process.env.REACT_APP_BACKEND_URL ?? 'http://192.168.1.20:8080' ;
+const BASE_URL = process.env.REACT_APP_BACKEND_URL ?? 'http://200.220.195.215:8080' ;
 
 axios.interceptors.response.use(function (response) {
      return response;
